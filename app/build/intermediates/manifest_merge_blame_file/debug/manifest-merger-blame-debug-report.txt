@@ -10,35 +10,35 @@
 10
 11    <!-- Permissions -->
 12    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-12-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:5:5-75
-12-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:5:22-72
+12-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:5:5-75
+12-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:5:22-72
 13    <uses-permission
-13-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:6:5-7:38
+13-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:6:5-7:38
 14        android:name="android.permission.READ_EXTERNAL_STORAGE"
-14-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:6:22-77
+14-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:6:22-77
 15        android:maxSdkVersion="32" />
-15-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:7:9-35
+15-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:7:9-35
 16    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-16-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:8:5-77
-16-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:8:22-74
+16-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:8:5-77
+16-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:8:22-74
 17    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
-17-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:9:5-92
-17-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:9:22-89
+17-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:9:5-92
+17-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:9:22-89
 18    <uses-permission android:name="android.permission.WAKE_LOCK" />
-18-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:10:5-68
-18-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:10:22-65
+18-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:10:5-68
+18-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:10:22-65
 19    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-19-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:11:5-81
-19-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:11:22-78
+19-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:11:5-81
+19-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:11:22-78
 20    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-20-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:12:5-79
-20-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:12:22-76
+20-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:12:5-79
+20-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:12:22-76
 21    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
-21-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:13:5-74
-21-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:13:22-71
+21-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:13:5-74
+21-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:13:22-71
 22    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-22-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:14:5-77
-22-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:14:22-74
+22-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:14:5-77
+22-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:14:22-74
 23    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 23-->[androidx.media3:media3-common:1.2.1] /home/ubuntu/.gradle/caches/transforms-3/feefe86630bf22db3d7576bdfc577968/transformed/jetified-media3-common-1.2.1/AndroidManifest.xml:22:5-79
 23-->[androidx.media3:media3-common:1.2.1] /home/ubuntu/.gradle/caches/transforms-3/feefe86630bf22db3d7576bdfc577968/transformed/jetified-media3-common-1.2.1/AndroidManifest.xml:22:22-76
@@ -55,65 +55,65 @@
 29-->[androidx.core:core:1.12.0] /home/ubuntu/.gradle/caches/transforms-3/d150840a2677aacd8b7212a1d3336357/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
 30
 31    <application
-31-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:16:5-48:19
+31-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:16:5-48:19
 32        android:name="com.alkhufash.music.MusicApplication"
-32-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:17:9-41
+32-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:17:9-41
 33        android:allowBackup="true"
-33-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:18:9-35
+33-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:18:9-35
 34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 34-->[androidx.core:core:1.12.0] /home/ubuntu/.gradle/caches/transforms-3/d150840a2677aacd8b7212a1d3336357/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
 35        android:debuggable="true"
 36        android:extractNativeLibs="false"
 37        android:hardwareAccelerated="true"
-37-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:24:9-43
+37-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:24:9-43
 38        android:icon="@mipmap/ic_launcher"
-38-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:19:9-43
+38-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:19:9-43
 39        android:label="@string/app_name"
-39-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:21:9-41
+39-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:21:9-41
 40        android:roundIcon="@mipmap/ic_launcher_round"
-40-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:20:9-54
+40-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:20:9-54
 41        android:supportsRtl="true"
-41-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:22:9-35
+41-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:22:9-35
 42        android:theme="@style/Theme.Music" >
-42-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:23:9-43
+42-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:23:9-43
 43
 44        <!-- Splash Screen -->
 45        <activity
-45-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:27:9-36:20
+45-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:27:9-36:20
 46            android:name="com.alkhufash.music.MainActivity"
-46-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:28:13-41
+46-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:28:13-41
 47            android:exported="true"
-47-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:29:13-36
+47-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:29:13-36
 48            android:launchMode="singleTop"
-48-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:30:13-43
+48-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:30:13-43
 49            android:theme="@style/Theme.Music.SplashScreen" >
-49-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:31:13-60
+49-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:31:13-60
 50            <intent-filter>
-50-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:32:13-35:29
+50-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:32:13-35:29
 51                <action android:name="android.intent.action.MAIN" />
-51-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:33:17-69
-51-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:33:25-66
+51-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:33:17-69
+51-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:33:25-66
 52
 53                <category android:name="android.intent.category.LAUNCHER" />
-53-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:34:17-77
-53-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:34:27-74
+53-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:34:17-77
+53-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:34:27-74
 54            </intent-filter>
 55        </activity>
 56
 57        <!-- Music Playback Service -->
 58        <service
-58-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:39:9-46:19
+58-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:39:9-46:19
 59            android:name="com.alkhufash.music.service.MusicService"
-59-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:40:13-49
+59-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:40:13-49
 60            android:exported="true"
-60-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:41:13-36
+60-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:41:13-36
 61            android:foregroundServiceType="mediaPlayback" >
-61-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:42:13-58
+61-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:42:13-58
 62            <intent-filter>
-62-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:43:13-45:29
+62-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:43:13-45:29
 63                <action android:name="androidx.media3.session.MediaSessionService" />
-63-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:44:17-86
-63-->/home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:44:25-83
+63-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:44:17-86
+63-->/home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:44:25-83
 64            </intent-filter>
 65        </service>
 66

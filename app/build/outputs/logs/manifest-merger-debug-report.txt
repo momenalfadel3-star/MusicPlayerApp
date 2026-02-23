@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:2:1-50:12
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:2:1-50:12
+INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:2:1-50:12
+INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:2:1-50:12
+INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:2:1-50:12
 MERGED from [androidx.media3:media3-ui:1.2.1] /home/ubuntu/.gradle/caches/transforms-3/caa73c75d7c682340e858a2a11e5cfaf/transformed/jetified-media3-ui-1.2.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.media3:media3-session:1.2.1] /home/ubuntu/.gradle/caches/transforms-3/9bc4081579b7047146f4d7401cadc2be/transformed/jetified-media3-session-1.2.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.media3:media3-extractor:1.2.1] /home/ubuntu/.gradle/caches/transforms-3/ead1478117026d84359e31a7ccfe2304/transformed/jetified-media3-extractor-1.2.1/AndroidManifest.xml:17:1-22:12
@@ -106,60 +106,60 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/u
 MERGED from [androidx.print:print:1.0.0] /home/ubuntu/.gradle/caches/transforms-3/610c40c4f30bb2a6995786e35c4d62da/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.dagger:dagger-lint-aar:2.50] /home/ubuntu/.gradle/caches/transforms-3/cbc2316778157e74e86a901a7f0cfb12/transformed/jetified-dagger-lint-aar-2.50/AndroidManifest.xml:16:1-19:12
 	package
-		INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml
+		INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml
+		INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml
+		INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.READ_MEDIA_AUDIO
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:5:5-75
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:5:5-75
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:5:22-72
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:5:22-72
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:6:5-7:38
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:6:5-7:38
 	android:maxSdkVersion
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:7:9-35
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:7:9-35
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:6:22-77
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:6:22-77
 uses-permission#android.permission.FOREGROUND_SERVICE
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:8:5-77
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:8:5-77
 MERGED from [androidx.work:work-runtime:2.9.0] /home/ubuntu/.gradle/caches/transforms-3/54d3653d4dfbf98e4987820117891021/transformed/work-runtime-2.9.0/AndroidManifest.xml:26:5-77
 MERGED from [androidx.work:work-runtime:2.9.0] /home/ubuntu/.gradle/caches/transforms-3/54d3653d4dfbf98e4987820117891021/transformed/work-runtime-2.9.0/AndroidManifest.xml:26:5-77
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:8:22-74
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:8:22-74
 uses-permission#android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:9:5-92
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:9:5-92
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:9:22-89
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:9:22-89
 uses-permission#android.permission.WAKE_LOCK
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:10:5-68
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:10:5-68
 MERGED from [androidx.work:work-runtime:2.9.0] /home/ubuntu/.gradle/caches/transforms-3/54d3653d4dfbf98e4987820117891021/transformed/work-runtime-2.9.0/AndroidManifest.xml:23:5-68
 MERGED from [androidx.work:work-runtime:2.9.0] /home/ubuntu/.gradle/caches/transforms-3/54d3653d4dfbf98e4987820117891021/transformed/work-runtime-2.9.0/AndroidManifest.xml:23:5-68
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:10:22-65
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:10:22-65
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:11:5-81
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:11:5-81
 MERGED from [androidx.work:work-runtime:2.9.0] /home/ubuntu/.gradle/caches/transforms-3/54d3653d4dfbf98e4987820117891021/transformed/work-runtime-2.9.0/AndroidManifest.xml:25:5-81
 MERGED from [androidx.work:work-runtime:2.9.0] /home/ubuntu/.gradle/caches/transforms-3/54d3653d4dfbf98e4987820117891021/transformed/work-runtime-2.9.0/AndroidManifest.xml:25:5-81
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:11:22-78
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:11:22-78
 uses-permission#android.permission.SCHEDULE_EXACT_ALARM
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:12:5-79
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:12:5-79
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:12:22-76
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:12:22-76
 uses-permission#android.permission.USE_EXACT_ALARM
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:13:5-74
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:13:5-74
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:13:22-71
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:13:22-71
 uses-permission#android.permission.POST_NOTIFICATIONS
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:14:5-77
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:14:5-77
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:14:22-74
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:14:22-74
 application
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:16:5-48:19
-INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:16:5-48:19
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:16:5-48:19
+INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:16:5-48:19
 MERGED from [androidx.work:work-runtime:2.9.0] /home/ubuntu/.gradle/caches/transforms-3/54d3653d4dfbf98e4987820117891021/transformed/work-runtime-2.9.0/AndroidManifest.xml:28:5-143:19
 MERGED from [androidx.work:work-runtime:2.9.0] /home/ubuntu/.gradle/caches/transforms-3/54d3653d4dfbf98e4987820117891021/transformed/work-runtime-2.9.0/AndroidManifest.xml:28:5-143:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] /home/ubuntu/.gradle/caches/transforms-3/8aaa89b3518664ca87504ae99356b36d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
@@ -181,63 +181,63 @@ MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/ubuntu/.gra
 MERGED from [androidx.startup:startup-runtime:1.1.1] /home/ubuntu/.gradle/caches/transforms-3/a64676f4b8bf4b6f752278b89a31c8e1/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] /home/ubuntu/.gradle/caches/transforms-3/a64676f4b8bf4b6f752278b89a31c8e1/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
 	android:extractNativeLibs
-		INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml
+		INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.12.0] /home/ubuntu/.gradle/caches/transforms-3/d150840a2677aacd8b7212a1d3336357/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:22:9-35
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:22:9-35
 	android:label
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:21:9-41
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:21:9-41
 	android:hardwareAccelerated
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:24:9-43
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:24:9-43
 	android:roundIcon
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:20:9-54
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:20:9-54
 	android:icon
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:19:9-43
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:19:9-43
 	android:allowBackup
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:18:9-35
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:18:9-35
 	android:theme
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:23:9-43
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:23:9-43
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:17:9-41
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:17:9-41
 activity#com.alkhufash.music.MainActivity
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:27:9-36:20
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:27:9-36:20
 	android:launchMode
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:30:13-43
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:30:13-43
 	android:exported
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:29:13-36
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:29:13-36
 	android:theme
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:31:13-60
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:31:13-60
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:28:13-41
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:28:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:32:13-35:29
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:32:13-35:29
 action#android.intent.action.MAIN
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:33:17-69
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:33:17-69
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:33:25-66
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:33:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:34:17-77
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:34:17-77
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:34:27-74
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:34:27-74
 service#com.alkhufash.music.service.MusicService
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:39:9-46:19
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:39:9-46:19
 	android:exported
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:41:13-36
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:41:13-36
 	android:foregroundServiceType
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:42:13-58
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:42:13-58
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:40:13-49
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:40:13-49
 intent-filter#action:name:androidx.media3.session.MediaSessionService
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:43:13-45:29
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:43:13-45:29
 action#androidx.media3.session.MediaSessionService
-ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:44:17-86
+ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:44:17-86
 	android:name
-		ADDED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml:44:25-83
+		ADDED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml:44:25-83
 uses-sdk
-INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml
-INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml
+INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml
+INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml
 MERGED from [androidx.media3:media3-ui:1.2.1] /home/ubuntu/.gradle/caches/transforms-3/caa73c75d7c682340e858a2a11e5cfaf/transformed/jetified-media3-ui-1.2.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.media3:media3-ui:1.2.1] /home/ubuntu/.gradle/caches/transforms-3/caa73c75d7c682340e858a2a11e5cfaf/transformed/jetified-media3-ui-1.2.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.media3:media3-session:1.2.1] /home/ubuntu/.gradle/caches/transforms-3/9bc4081579b7047146f4d7401cadc2be/transformed/jetified-media3-session-1.2.1/AndroidManifest.xml:20:5-44
@@ -441,9 +441,9 @@ MERGED from [androidx.print:print:1.0.0] /home/ubuntu/.gradle/caches/transforms-
 MERGED from [com.google.dagger:dagger-lint-aar:2.50] /home/ubuntu/.gradle/caches/transforms-3/cbc2316778157e74e86a901a7f0cfb12/transformed/jetified-dagger-lint-aar-2.50/AndroidManifest.xml:18:3-42
 MERGED from [com.google.dagger:dagger-lint-aar:2.50] /home/ubuntu/.gradle/caches/transforms-3/cbc2316778157e74e86a901a7f0cfb12/transformed/jetified-dagger-lint-aar-2.50/AndroidManifest.xml:18:3-42
 	android:targetSdkVersion
-		INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml
+		INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/ubuntu/MusicPlayer/app/src/main/AndroidManifest.xml
+		INJECTED from /home/ubuntu/MusicPlayerApp/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from [androidx.media3:media3-common:1.2.1] /home/ubuntu/.gradle/caches/transforms-3/feefe86630bf22db3d7576bdfc577968/transformed/jetified-media3-common-1.2.1/AndroidManifest.xml:22:5-79
 MERGED from [androidx.media3:media3-exoplayer:1.2.1] /home/ubuntu/.gradle/caches/transforms-3/9cd2008761784c04fa07bf0aafa298ef/transformed/jetified-media3-exoplayer-1.2.1/AndroidManifest.xml:22:5-79

@@ -69,9 +69,9 @@ com.alkhufash.music.app-jetified-ui-text-release-67 /home/ubuntu/.gradle/caches/
 com.alkhufash.music.app-jetified-hilt-work-1.1.0-68 /home/ubuntu/.gradle/caches/transforms-3/f473504d07632e3addb1d222fada51e6/transformed/jetified-hilt-work-1.1.0/res
 com.alkhufash.music.app-lifecycle-viewmodel-2.7.0-69 /home/ubuntu/.gradle/caches/transforms-3/fa6e6a9b1b1de0febfd79edc6e15da81/transformed/lifecycle-viewmodel-2.7.0/res
 com.alkhufash.music.app-jetified-core-splashscreen-1.0.1-70 /home/ubuntu/.gradle/caches/transforms-3/ff16023531100cc11af93725fe681b49/transformed/jetified-core-splashscreen-1.0.1/res
-com.alkhufash.music.app-resValues-71 /home/ubuntu/MusicPlayer/app/build/generated/res/resValues/debug
-com.alkhufash.music.app-packageDebugResources-72 /home/ubuntu/MusicPlayer/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
-com.alkhufash.music.app-packageDebugResources-73 /home/ubuntu/MusicPlayer/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
-com.alkhufash.music.app-merged_res-74 /home/ubuntu/MusicPlayer/app/build/intermediates/merged_res/debug
-com.alkhufash.music.app-debug-75 /home/ubuntu/MusicPlayer/app/src/debug/res
-com.alkhufash.music.app-main-76 /home/ubuntu/MusicPlayer/app/src/main/res
+com.alkhufash.music.app-resValues-71 /home/ubuntu/MusicPlayerApp/app/build/generated/res/resValues/debug
+com.alkhufash.music.app-packageDebugResources-72 /home/ubuntu/MusicPlayerApp/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.alkhufash.music.app-packageDebugResources-73 /home/ubuntu/MusicPlayerApp/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.alkhufash.music.app-merged_res-74 /home/ubuntu/MusicPlayerApp/app/build/intermediates/merged_res/debug
+com.alkhufash.music.app-debug-75 /home/ubuntu/MusicPlayerApp/app/src/debug/res
+com.alkhufash.music.app-main-76 /home/ubuntu/MusicPlayerApp/app/src/main/res
