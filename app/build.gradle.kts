@@ -13,8 +13,10 @@ android {
         applicationId = "com.alkhufash.music"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "2.0.0"
+        // دعم اللغة العربية RTL
+        resourceConfigurations += listOf("ar", "en")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -23,12 +25,20 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+            isDebuggable = true
+        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // توقيع الإصدار (يُضاف لاحقاً)
+            // signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {

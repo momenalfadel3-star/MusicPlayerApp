@@ -3,12 +3,12 @@
     <style name="Theme.Music" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">#0A0A14</item>
     </style>
 
     <style name="Theme.Music.SplashScreen" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#1A0533</item>
+        <item name="windowSplashScreenBackground">#0A0A14</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
-        <!-- <item name="windowSplashScreenBrandingImage">@drawable/ic_splash_logo</item> -->
         <item name="postSplashScreenTheme">@style/Theme.Music</item>
     </style>
 </resources>

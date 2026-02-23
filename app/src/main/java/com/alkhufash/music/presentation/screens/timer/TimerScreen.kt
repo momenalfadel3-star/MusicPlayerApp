@@ -2,22 +2,27 @@ package com.alkhufash.music.presentation.screens.timer
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.alkhufash.music.presentation.theme.MusicOrange
-import com.alkhufash.music.presentation.theme.MusicPink
-import com.alkhufash.music.presentation.theme.MusicPurple
+import com.alkhufash.music.R
+import com.alkhufash.music.presentation.theme.BatOrange
+import com.alkhufash.music.presentation.theme.BatPink
+import com.alkhufash.music.presentation.theme.BatPurple
 import com.alkhufash.music.presentation.viewmodel.MusicViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,12 +42,20 @@ fun TimerScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Timer") },
+                title = {
+                    Text(
+                        stringResource(R.string.timer),
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.Default.ArrowBack, "Back")
+                        Icon(Icons.Default.ArrowBack, stringResource(R.string.cancel))
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.Transparent
+                )
             )
         }
     ) { paddingValues ->
@@ -50,15 +63,16 @@ fun TimerScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            // Sleep Timer Card
+            // بطاقة مؤقت النوم (إيقاف التشغيل)
             TimerCard(
-                title = "Sleep Timer",
-                subtitle = "Stop playback after",
+                title = stringResource(R.string.sleep_timer),
+                subtitle = stringResource(R.string.sleep_timer_subtitle),
                 icon = Icons.Default.NightShelter,
-                gradientColors = listOf(MusicPurple, MusicPink),
+                gradientColors = listOf(BatPurple, BatPink),
                 isActive = isSleepTimerActive,
                 activeMinutes = sleepMinutes,
                 sliderValue = sleepTimerValue,
@@ -67,12 +81,12 @@ fun TimerScreen(
                 onCancelTimer = { viewModel.cancelSleepTimer() }
             )
 
-            // Start Timer Card
+            // بطاقة مؤقت البدء (تشغيل مؤجل)
             TimerCard(
-                title = "Start Timer",
-                subtitle = "Begin playback after",
+                title = stringResource(R.string.start_timer),
+                subtitle = stringResource(R.string.start_timer_subtitle),
                 icon = Icons.Default.PlayCircle,
-                gradientColors = listOf(MusicOrange, MusicPink),
+                gradientColors = listOf(BatOrange, BatPink),
                 isActive = isStartTimerActive,
                 activeMinutes = startMinutes,
                 sliderValue = startTimerValue,
@@ -81,11 +95,12 @@ fun TimerScreen(
                 onCancelTimer = { viewModel.cancelStartTimer() }
             )
 
-            // Quick presets
+            // اختيارات سريعة
             Text(
-                "Quick Presets",
+                stringResource(R.string.quick_presets),
                 style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
             )
 
             Row(
@@ -94,10 +109,41 @@ fun TimerScreen(
             ) {
                 listOf(15, 30, 45, 60).forEach { minutes ->
                     FilterChip(
-                        selected = false,
+                        selected = sleepTimerValue == minutes.toFloat(),
                         onClick = { sleepTimerValue = minutes.toFloat() },
-                        label = { Text("${minutes}m") },
-                        modifier = Modifier.weight(1f)
+                        label = { Text("${minutes}د") },
+                        modifier = Modifier.weight(1f),
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = BatPurple,
+                            selectedLabelColor = Color.White
+                        )
+                    )
+                }
+            }
+
+            // ملاحظة توضيحية
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = BatPurple.copy(alpha = 0.1f)
+                )
+            ) {
+                Row(
+                    modifier = Modifier.padding(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        Icons.Default.Info,
+                        contentDescription = null,
+                        tint = BatPurple,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        "مؤقت النوم يوقف التشغيل تلقائياً، ومؤقت البدء يشغل الموسيقى بعد المدة المحددة",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -120,37 +166,58 @@ fun TimerCard(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
     ) {
         Column(
             modifier = Modifier.padding(20.dp)
         ) {
-            // Header
+            // رأس البطاقة
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
                     modifier = Modifier
-                        .size(48.dp)
+                        .size(52.dp)
+                        .clip(RoundedCornerShape(14.dp))
                         .background(
-                            Brush.radialGradient(gradientColors),
-                            RoundedCornerShape(12.dp)
+                            Brush.linearGradient(gradientColors)
                         ),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(icon, contentDescription = null, tint = Color.White)
+                    Icon(icon, contentDescription = null, tint = Color.White, modifier = Modifier.size(28.dp))
                 }
-                Spacer(modifier = Modifier.width(12.dp))
-                Column {
-                    Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                    Text(subtitle, style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Spacer(modifier = Modifier.width(14.dp))
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        title,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        subtitle,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
-                Spacer(modifier = Modifier.weight(1f))
                 if (isActive) {
-                    Badge(containerColor = MaterialTheme.colorScheme.primary) {
-                        Text("${activeMinutes}m")
+                    // مؤشر نشط متوهج
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(20.dp))
+                            .background(gradientColors.first())
+                            .padding(horizontal = 12.dp, vertical = 6.dp)
+                    ) {
+                        Text(
+                            "${activeMinutes}د",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
                     }
                 }
             }
@@ -158,15 +225,17 @@ fun TimerCard(
             Spacer(modifier = Modifier.height(16.dp))
 
             if (!isActive) {
-                // Slider
+                // عرض الوقت المختار
                 Text(
-                    "${sliderValue.toInt()} minutes",
+                    "${sliderValue.toInt()} دقيقة",
                     style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.ExtraBold,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth(),
                     color = gradientColors.first()
                 )
+
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Slider(
                     value = sliderValue,
@@ -175,7 +244,8 @@ fun TimerCard(
                     steps = 22,
                     colors = SliderDefaults.colors(
                         thumbColor = gradientColors.first(),
-                        activeTrackColor = gradientColors.first()
+                        activeTrackColor = gradientColors.first(),
+                        inactiveTrackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
                     )
                 )
 
@@ -183,40 +253,67 @@ fun TimerCard(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text("5 min", style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text("2 hours", style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(
+                        "5 دقائق",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        "ساعتان",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(14.dp))
 
+                // زر الضبط
                 Button(
                     onClick = onSetTimer,
                     modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(14.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = gradientColors.first()
                     )
                 ) {
                     Icon(Icons.Default.Timer, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Set Timer")
+                    Text(
+                        "ضبط المؤقت",
+                        fontWeight = FontWeight.Bold
+                    )
                 }
             } else {
-                // Active state
-                Text(
-                    "Timer active: ${activeMinutes} minutes remaining",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Spacer(modifier = Modifier.height(12.dp))
+                // حالة نشطة
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        Icons.Default.CheckCircle,
+                        contentDescription = null,
+                        tint = gradientColors.first(),
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        "المؤقت نشط: $activeMinutes دقيقة متبقية",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = gradientColors.first(),
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+                Spacer(modifier = Modifier.height(14.dp))
                 OutlinedButton(
                     onClick = onCancelTimer,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(14.dp),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = gradientColors.first()
+                    )
                 ) {
                     Icon(Icons.Default.Cancel, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Cancel Timer")
+                    Text("إلغاء المؤقت", fontWeight = FontWeight.Bold)
                 }
             }
         }

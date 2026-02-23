@@ -5,14 +5,34 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- Gradient background -->
-    <path
-        android:fillColor="#6B21A8"
-        android:pathData="M0,0h108v108h-108z" />
-
-    <!-- Music note -->
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M45,28 L45,62 Q45,70 37,70 Q29,70 29,62 Q29,54 37,54 Q41,54 45,57 L45,36 L67,30 L67,60 Q67,68 59,68 Q51,68 51,60 Q51,52 59,52 Q63,52 67,55 L67,30 Z" />
+  <!-- Bat wings - purple -->
+  <path
+      android:pathData="M54,30 C54,30 28,36 16,50 C10,57 13,65 20,66 C28,67 35,61 40,55 C43,51 46,48 50,48 C52,48 53,50 54,52 C55,50 56,48 58,48 C62,48 65,51 68,55 C73,61 80,67 88,66 C95,65 98,57 92,50 C80,36 54,30 54,30 Z"
+      android:fillColor="#6B21A8"/>
+  <!-- Wing lower - pink -->
+  <path
+      android:pathData="M54,52 C53,50 52,48 50,48 C48,48 46,50 44,52 C40,56 35,61 28,64 C34,67 41,65 46,61 C49,58 52,55 54,58 C56,55 59,58 62,61 C67,65 74,67 80,64 C73,61 68,56 64,52 C62,50 60,48 58,48 C56,48 55,50 54,52 Z"
+      android:fillColor="#EC4899"/>
+  <!-- Bat ears -->
+  <path
+      android:pathData="M50,32 L46,22 L54,30 Z"
+      android:fillColor="#6B21A8"/>
+  <path
+      android:pathData="M58,32 L62,22 L54,30 Z"
+      android:fillColor="#6B21A8"/>
+  <!-- Musical note left -->
+  <path
+      android:pathData="M26,46 L26,56 C26,58 23,59 22,57 C21,55 23,53 25,54 L25,46 Z"
+      android:fillColor="#F0ABFC"/>
+  <path
+      android:pathData="M26,46 L31,44 L31,48 L26,50 Z"
+      android:fillColor="#F0ABFC"/>
+  <!-- Musical note right -->
+  <path
+      android:pathData="M82,46 L82,56 C82,58 79,59 78,57 C77,55 79,53 81,54 L81,46 Z"
+      android:fillColor="#F0ABFC"/>
+  <path
+      android:pathData="M82,46 L87,44 L87,48 L82,50 Z"
+      android:fillColor="#F0ABFC"/>
 
 </vector>

@@ -16,15 +16,19 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.media3.common.Player
 import coil.compose.AsyncImage
-import com.alkhufash.music.presentation.theme.MusicOrange
-import com.alkhufash.music.presentation.theme.MusicPink
-import com.alkhufash.music.presentation.theme.MusicPurple
+import com.alkhufash.music.R
+import com.alkhufash.music.presentation.theme.BatOrange
+import com.alkhufash.music.presentation.theme.BatPink
+import com.alkhufash.music.presentation.theme.BatPurple
+import com.alkhufash.music.presentation.theme.BatPurpleLight
 import com.alkhufash.music.presentation.viewmodel.MusicViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,7 +46,7 @@ fun NowPlayingScreen(
 
     val song = uiState.currentSong
 
-    // Rotating animation for album art
+    // انيميشن دوران الأسطوانة
     val rotation = rememberInfiniteTransition(label = "rotation")
     val rotationAngle by rotation.animateFloat(
         initialValue = 0f,
@@ -54,14 +58,25 @@ fun NowPlayingScreen(
         label = "rotation"
     )
 
+    // انيميشن نبض لزر التشغيل
+    val pulseScale by rememberInfiniteTransition(label = "pulse").animateFloat(
+        initialValue = 1f,
+        targetValue = 1.08f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(800, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "pulse"
+    )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
-                        MusicPurple.copy(alpha = 0.8f),
-                        MaterialTheme.colorScheme.background,
+                        BatPurple.copy(alpha = 0.9f),
+                        MaterialTheme.colorScheme.background.copy(alpha = 0.95f),
                         MaterialTheme.colorScheme.background
                     )
                 )
@@ -74,7 +89,7 @@ fun NowPlayingScreen(
                 .navigationBarsPadding(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Top Bar
+            // شريط العنوان العلوي
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -84,8 +99,9 @@ fun NowPlayingScreen(
                 IconButton(onClick = onNavigateBack) {
                     Icon(
                         Icons.Default.KeyboardArrowDown,
-                        contentDescription = "Back",
-                        modifier = Modifier.size(32.dp)
+                        contentDescription = stringResource(R.string.cancel),
+                        modifier = Modifier.size(32.dp),
+                        tint = Color.White
                     )
                 }
                 Column(
@@ -93,61 +109,118 @@ fun NowPlayingScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        "NOW PLAYING",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        stringResource(R.string.now_playing_label),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = Color.White.copy(alpha = 0.8f),
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = androidx.compose.ui.unit.TextUnit.Unspecified
                     )
                 }
                 IconButton(onClick = { /* Queue */ }) {
-                    Icon(Icons.Default.QueueMusic, contentDescription = "Queue")
+                    Icon(
+                        Icons.Default.QueueMusic,
+                        contentDescription = stringResource(R.string.queue),
+                        tint = Color.White
+                    )
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-            // Album Art - Rotating Circle
+            // الأسطوانة الدوارة - تصميم عصري
             Box(
                 modifier = Modifier
-                    .size(280.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.surfaceVariant)
-                    .rotate(if (playerState.isPlaying) rotationAngle else rotationAngle),
+                    .size(270.dp),
                 contentAlignment = Alignment.Center
             ) {
-                AsyncImage(
-                    model = song?.let { "content://media/external/audio/albumart/${it.albumId}" },
-                    contentDescription = "Album Art",
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
-                // Center hole
+                // حلقة خارجية متوهجة
                 Box(
                     modifier = Modifier
-                        .size(60.dp)
+                        .size(270.dp)
                         .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.background)
+                        .background(
+                            Brush.radialGradient(
+                                colors = listOf(
+                                    BatPurple.copy(alpha = 0.4f),
+                                    BatPink.copy(alpha = 0.2f),
+                                    Color.Transparent
+                                )
+                            )
+                        )
                 )
+                // الأسطوانة الرئيسية
+                Box(
+                    modifier = Modifier
+                        .size(240.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
+                        .rotate(if (playerState.isPlaying) rotationAngle else rotationAngle),
+                    contentAlignment = Alignment.Center
+                ) {
+                    AsyncImage(
+                        model = song?.let { "content://media/external/audio/albumart/${it.albumId}" },
+                        contentDescription = stringResource(R.string.albums),
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                    // تدرج فوق الصورة
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                Brush.radialGradient(
+                                    colors = listOf(
+                                        Color.Transparent,
+                                        Color.Black.copy(alpha = 0.2f)
+                                    )
+                                )
+                            )
+                    )
+                    // الثقب المركزي
+                    Box(
+                        modifier = Modifier
+                            .size(64.dp)
+                            .clip(CircleShape)
+                            .background(
+                                Brush.radialGradient(
+                                    colors = listOf(
+                                        MaterialTheme.colorScheme.background,
+                                        MaterialTheme.colorScheme.surfaceVariant
+                                    )
+                                )
+                            )
+                    )
+                    // نقطة مركزية
+                    Box(
+                        modifier = Modifier
+                            .size(12.dp)
+                            .clip(CircleShape)
+                            .background(BatPurple)
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(28.dp))
 
-            // Song Info
+            // معلومات الأغنية
             Column(
                 modifier = Modifier.padding(horizontal = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = song?.title ?: "No song playing",
+                    text = song?.title ?: stringResource(R.string.no_song_playing),
                     style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.ExtraBold,
                     textAlign = TextAlign.Center,
                     maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(6.dp))
                 Text(
                     text = song?.artist ?: "",
                     style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = BatPurpleLight,
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -158,11 +231,11 @@ fun NowPlayingScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            // Seek Bar
+            // شريط التقدم
             Column(
-                modifier = Modifier.padding(horizontal = 32.dp)
+                modifier = Modifier.padding(horizontal = 28.dp)
             ) {
                 Slider(
                     value = if (duration > 0) currentPosition.toFloat() / duration.toFloat() else 0f,
@@ -170,8 +243,8 @@ fun NowPlayingScreen(
                         viewModel.seekTo((progress * duration).toLong())
                     },
                     colors = SliderDefaults.colors(
-                        thumbColor = MaterialTheme.colorScheme.primary,
-                        activeTrackColor = MaterialTheme.colorScheme.primary,
+                        thumbColor = BatPink,
+                        activeTrackColor = BatPurple,
                         inactiveTrackColor = MaterialTheme.colorScheme.surfaceVariant
                     )
                 )
@@ -182,7 +255,7 @@ fun NowPlayingScreen(
                     Text(
                         text = formatDuration(currentPosition),
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = BatPurpleLight
                     )
                     Text(
                         text = formatDuration(duration),
@@ -192,9 +265,9 @@ fun NowPlayingScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
-            // Playback Controls
+            // أزرار التحكم الرئيسية
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -202,118 +275,138 @@ fun NowPlayingScreen(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Shuffle
+                // تشغيل عشوائي
                 IconButton(onClick = { viewModel.toggleShuffle() }) {
                     Icon(
                         Icons.Default.Shuffle,
-                        contentDescription = "Shuffle",
-                        tint = if (playerState.isShuffleOn) MaterialTheme.colorScheme.primary
+                        contentDescription = stringResource(R.string.shuffle),
+                        tint = if (playerState.isShuffleOn) BatPink
                         else MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(26.dp)
                     )
                 }
 
-                // Previous
+                // السابق
                 IconButton(
                     onClick = { viewModel.seekToPrevious() },
                     modifier = Modifier.size(56.dp)
                 ) {
                     Icon(
                         Icons.Default.SkipPrevious,
-                        contentDescription = "Previous",
-                        modifier = Modifier.size(36.dp)
+                        contentDescription = "السابق",
+                        modifier = Modifier.size(38.dp),
+                        tint = MaterialTheme.colorScheme.onBackground
                     )
                 }
 
-                // Play/Pause
-                FilledIconButton(
-                    onClick = { viewModel.playOrPause() },
-                    modifier = Modifier.size(72.dp),
-                    colors = IconButtonDefaults.filledIconButtonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    )
+                // تشغيل/إيقاف - زر كبير متوهج
+                Box(
+                    modifier = Modifier
+                        .size(if (playerState.isPlaying) (72 * pulseScale).dp else 72.dp)
+                        .clip(CircleShape)
+                        .background(
+                            Brush.radialGradient(
+                                colors = listOf(BatPurple, BatPink)
+                            )
+                        ),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = if (playerState.isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
-                        contentDescription = if (playerState.isPlaying) "Pause" else "Play",
-                        modifier = Modifier.size(40.dp),
-                        tint = Color.White
-                    )
+                    IconButton(
+                        onClick = { viewModel.playOrPause() },
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Icon(
+                            imageVector = if (playerState.isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
+                            contentDescription = if (playerState.isPlaying) stringResource(R.string.sleep_timer) else stringResource(R.string.start_timer),
+                            modifier = Modifier.size(40.dp),
+                            tint = Color.White
+                        )
+                    }
                 }
 
-                // Next
+                // التالي
                 IconButton(
                     onClick = { viewModel.seekToNext() },
                     modifier = Modifier.size(56.dp)
                 ) {
                     Icon(
                         Icons.Default.SkipNext,
-                        contentDescription = "Next",
-                        modifier = Modifier.size(36.dp)
+                        contentDescription = "التالي",
+                        modifier = Modifier.size(38.dp),
+                        tint = MaterialTheme.colorScheme.onBackground
                     )
                 }
 
-                // Repeat
+                // تكرار
                 IconButton(onClick = { viewModel.toggleRepeat() }) {
                     Icon(
                         imageVector = when (playerState.repeatMode) {
                             Player.REPEAT_MODE_ONE -> Icons.Default.RepeatOne
                             else -> Icons.Default.Repeat
                         },
-                        contentDescription = "Repeat",
-                        tint = if (playerState.repeatMode != Player.REPEAT_MODE_OFF)
-                            MaterialTheme.colorScheme.primary
+                        contentDescription = stringResource(R.string.repeat),
+                        tint = if (playerState.repeatMode != Player.REPEAT_MODE_OFF) BatPink
                         else MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(26.dp)
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
-            // Extra Controls Row
-            Row(
+            // أزرار إضافية
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 32.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                    .padding(horizontal = 24.dp),
+                shape = RoundedCornerShape(20.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
+                )
             ) {
-                // Favorite
-                IconButton(onClick = { song?.let { viewModel.toggleFavorite(it.id) } }) {
-                    Icon(
-                        imageVector = if (song?.isFavorite == true) Icons.Default.Favorite
-                        else Icons.Default.FavoriteBorder,
-                        contentDescription = "Favorite",
-                        tint = if (song?.isFavorite == true) MusicPink
-                        else MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    // مفضلة
+                    IconButton(onClick = { song?.let { viewModel.toggleFavorite(it.id) } }) {
+                        Icon(
+                            imageVector = if (song?.isFavorite == true) Icons.Default.Favorite
+                            else Icons.Default.FavoriteBorder,
+                            contentDescription = stringResource(R.string.favorites),
+                            tint = if (song?.isFavorite == true) BatPink
+                            else MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
 
-                // Timer
-                IconButton(onClick = onNavigateToTimer) {
-                    Icon(
-                        Icons.Default.Timer,
-                        contentDescription = "Timer",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+                    // مؤقت
+                    IconButton(onClick = onNavigateToTimer) {
+                        Icon(
+                            Icons.Default.Timer,
+                            contentDescription = stringResource(R.string.timer),
+                            tint = BatOrange
+                        )
+                    }
 
-                // Equalizer
-                IconButton(onClick = onNavigateToEqualizer) {
-                    Icon(
-                        Icons.Default.Equalizer,
-                        contentDescription = "Equalizer",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+                    // معادل صوتي
+                    IconButton(onClick = onNavigateToEqualizer) {
+                        Icon(
+                            Icons.Default.Equalizer,
+                            contentDescription = stringResource(R.string.equalizer),
+                            tint = BatPurpleLight
+                        )
+                    }
 
-                // Share
-                IconButton(onClick = { /* Share */ }) {
-                    Icon(
-                        Icons.Default.Share,
-                        contentDescription = "Share",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    // مشاركة
+                    IconButton(onClick = { /* Share */ }) {
+                        Icon(
+                            Icons.Default.Share,
+                            contentDescription = stringResource(R.string.share),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                 }
             }
         }

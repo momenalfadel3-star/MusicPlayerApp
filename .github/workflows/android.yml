@@ -1,4 +1,4 @@
-name: Android CI
+name: الخفاش - بناء ونشر APK
 
 on:
   push:
@@ -6,31 +6,117 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'نوع البناء (debug أو release)'
+        required: false
+        default: 'debug'
+        type: choice
+        options:
+          - debug
+          - release
 
 jobs:
   build:
+    name: بناء تطبيق الخفاش
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    # ===== استنساخ الكود =====
+    - name: استنساخ المستودع
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-    - name: Set up JDK 17
+    # ===== إعداد Java 17 =====
+    - name: إعداد JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
 
-    - name: Setup Gradle
+    # ===== إعداد Gradle =====
+    - name: إعداد Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
-        gradle-version: 8.2
+        gradle-version: wrapper
 
-    - name: Build debug APK
-      run: gradle assembleDebug
+    # ===== منح صلاحيات gradlew =====
+    - name: منح صلاحيات gradlew
+      run: chmod +x gradlew
 
-    - name: Upload APK
+    # ===== تخزين مؤقت لـ Gradle =====
+    - name: تخزين مؤقت لـ Gradle
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    # ===== بناء APK Debug =====
+    - name: بناء APK Debug
+      run: ./gradlew assembleDebug --no-daemon --stacktrace
+      env:
+        GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false"
+
+    # ===== رفع APK Debug =====
+    - name: رفع APK Debug
       uses: actions/upload-artifact@v4
       with:
-        name: app-debug-apk
+        name: alkhufash-music-debug-v${{ github.run_number }}
         path: app/build/outputs/apk/debug/app-debug.apk
+        retention-days: 30
+
+    # ===== إنشاء Release تلقائي =====
+    - name: إنشاء Release تلقائي
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v2.0.${{ github.run_number }}
+        name: "الخفاش v2.0.${{ github.run_number }}"
+        body: |
+          ## تطبيق الخفاش - مشغل الموسيقى
+
+          ### ما الجديد في هذا الإصدار:
+          - تصميم عصري واحترافي
+          - دعم كامل للغة العربية
+          - إصلاح مؤقت التشغيل والإيقاف
+          - لوقو الخفاش الجديد
+          - تحسينات في الأداء
+
+          ### كيفية التثبيت:
+          1. قم بتحميل ملف `alkhufash-music.apk`
+          2. فعّل "مصادر غير معروفة" في إعدادات الأمان
+          3. ثبّت التطبيق
+
+          > **ملاحظة:** هذا إصدار تجريبي (Debug) - لا يحتاج إلى توقيع رقمي
+        files: app/build/outputs/apk/debug/app-debug.apk
+        draft: false
+        prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }}
+        generate_release_notes: false
+        fail_on_unmatched_files: false
+
+    # ===== ملخص البناء =====
+    - name: ملخص البناء
+      if: always()
+      run: |
+        echo "## نتيجة البناء" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        if [ -f "app/build/outputs/apk/debug/app-debug.apk" ]; then
+          APK_SIZE=$(du -sh app/build/outputs/apk/debug/app-debug.apk | cut -f1)
+          echo "✅ **تم البناء بنجاح!**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| المعلومة | القيمة |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| اسم التطبيق | الخفاش - مشغل الموسيقى |" >> $GITHUB_STEP_SUMMARY
+          echo "| الإصدار | 2.0.${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| حجم APK | $APK_SIZE |" >> $GITHUB_STEP_SUMMARY
+          echo "| نوع البناء | Debug |" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ **فشل البناء**" >> $GITHUB_STEP_SUMMARY
+        fi
