@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+build_log.txt
+
+app/build/intermediates/
+app/build/outputs/
