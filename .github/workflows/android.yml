@@ -1,5 +1,4 @@
 name: الخفاش - بناء ونشر APK
-
 on:
   push:
     branches: [ "main" ]
@@ -16,18 +15,19 @@ on:
           - debug
           - release
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: بناء تطبيق الخفاش
     runs-on: ubuntu-latest
-
     steps:
     # ===== استنساخ الكود =====
     - name: استنساخ المستودع
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-
     # ===== إعداد Java 17 =====
     - name: إعداد JDK 17
       uses: actions/setup-java@v4
@@ -35,17 +35,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
-
     # ===== إعداد Gradle =====
     - name: إعداد Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
         gradle-version: wrapper
-
     # ===== منح صلاحيات gradlew =====
     - name: منح صلاحيات gradlew
       run: chmod +x gradlew
-
     # ===== تخزين مؤقت لـ Gradle =====
     - name: تخزين مؤقت لـ Gradle
       uses: actions/cache@v4
@@ -56,13 +53,11 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
-
     # ===== بناء APK Debug =====
     - name: بناء APK Debug
       run: ./gradlew assembleDebug --no-daemon --stacktrace
       env:
         GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false"
-
     # ===== رفع APK Debug =====
     - name: رفع APK Debug
       uses: actions/upload-artifact@v4
@@ -70,7 +65,6 @@ jobs:
         name: alkhufash-music-debug-v${{ github.run_number }}
         path: app/build/outputs/apk/debug/app-debug.apk
         retention-days: 30
-
     # ===== إنشاء Release تلقائي =====
     - name: إنشاء Release تلقائي
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -80,19 +74,16 @@ jobs:
         name: "الخفاش v2.0.${{ github.run_number }}"
         body: |
           ## تطبيق الخفاش - مشغل الموسيقى
-
           ### ما الجديد في هذا الإصدار:
           - تصميم عصري واحترافي
           - دعم كامل للغة العربية
           - إصلاح مؤقت التشغيل والإيقاف
           - لوقو الخفاش الجديد
           - تحسينات في الأداء
-
           ### كيفية التثبيت:
           1. قم بتحميل ملف `alkhufash-music.apk`
           2. فعّل "مصادر غير معروفة" في إعدادات الأمان
           3. ثبّت التطبيق
-
           > **ملاحظة:** هذا إصدار تجريبي (Debug) - لا يحتاج إلى توقيع رقمي
         files: app/build/outputs/apk/debug/app-debug.apk
         draft: false
@@ -100,7 +91,6 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         generate_release_notes: false
         fail_on_unmatched_files: false
-
     # ===== ملخص البناء =====
     - name: ملخص البناء
       if: always()
