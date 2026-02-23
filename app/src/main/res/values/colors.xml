@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_dark">#1A0533</color>
+    <color name="purple_medium">#6B21A8</color>
+    <color name="pink_light">#EC4899</color>
+    <color name="orange_light">#F97316</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="surface_dark">#0F0F1A</color>
+    <color name="surface_card">#1E1E2E</color>
+</resources>

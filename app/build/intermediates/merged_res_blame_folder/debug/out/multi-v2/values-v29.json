@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.alkhufash.music.app-mergeDebugResources-73:/values-v29/values-v29.xml",
+            "map": [
+                {
+                    "source": "/home/ubuntu/.gradle/caches/transforms-3/ff16023531100cc11af93725fe681b49/transformed/jetified-core-splashscreen-1.0.1/res/values-v29/values-v29.xml",
+                    "from": {
+                        "startLines": "2,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,374",
+                        "endLines": "6,8",
+                        "endColumns": "12,12",
+                        "endOffsets": "369,464"
+                    }
+                }
+            ]
+        }
+    ]
+}
