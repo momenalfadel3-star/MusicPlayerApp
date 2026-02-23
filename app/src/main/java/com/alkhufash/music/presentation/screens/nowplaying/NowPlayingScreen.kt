@@ -30,6 +30,7 @@ import com.alkhufash.music.presentation.theme.BatPink
 import com.alkhufash.music.presentation.theme.BatPurple
 import com.alkhufash.music.presentation.theme.BatPurpleLight
 import com.alkhufash.music.presentation.viewmodel.MusicViewModel
+import com.alkhufash.music.service.PlayerState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

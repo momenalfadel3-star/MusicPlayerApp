@@ -38,6 +38,7 @@ import com.alkhufash.music.presentation.theme.BatPink
 import com.alkhufash.music.presentation.theme.BatPurple
 import com.alkhufash.music.presentation.theme.BatPurpleLight
 import com.alkhufash.music.presentation.viewmodel.MusicViewModel
+import com.alkhufash.music.service.PlayerState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -401,7 +402,7 @@ fun AlbumCard(
             ) {
                 AsyncImage(
                     model = "content://media/external/audio/albumart/${album.id}",
-                    contentDescription = album.title,
+                    contentDescription = album.name,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
@@ -421,7 +422,7 @@ fun AlbumCard(
             }
             Column(modifier = Modifier.padding(12.dp)) {
                 Text(
-                    text = album.title,
+                    text = album.name,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
