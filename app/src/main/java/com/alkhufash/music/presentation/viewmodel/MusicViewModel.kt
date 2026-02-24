@@ -13,6 +13,7 @@ import com.alkhufash.music.domain.model.Song
 import com.alkhufash.music.domain.repository.MusicRepository
 import com.alkhufash.music.service.MusicController
 import com.alkhufash.music.service.PlayerState
+import com.alkhufash.music.services.AutoStartTimerService
 import com.alkhufash.music.worker.SleepTimerWorker
 import com.alkhufash.music.worker.StartTimerWorker
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -321,6 +322,22 @@ class MusicViewModel @Inject constructor(
 
     fun cancelSleepTimer() = setSleepTimer(0)
     fun cancelStartTimer() = setStartTimer(0)
+
+    /**
+     * تشغيل المؤقت عبر الخدمة (Service) كما طلب المستخدم
+     */
+    fun startTimerWithService(minutes: Int) {
+        val intent = Intent(context, AutoStartTimerService::class.java).apply {
+            putExtra("timer_minutes", minutes)
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(intent)
+        } else {
+            context.startService(intent)
+        }
+        // تحديث الحالة المحلية أيضاً للمزامنة
+        setStartTimer(minutes)
+    }
 
     // Album songs
     fun getAlbumSongs(albumId: Long): List<Song> {

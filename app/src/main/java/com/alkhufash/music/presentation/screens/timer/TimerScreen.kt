@@ -102,7 +102,7 @@ fun TimerScreen(
                 countdownDisplay = startTimerDisplay,
                 sliderValue = startTimerValue,
                 onSliderChange = { startTimerValue = it },
-                onSetTimer = { viewModel.setStartTimer(startTimerValue.toInt()) },
+                onSetTimer = { viewModel.startTimerWithService(startTimerValue.toInt()) },
                 onCancelTimer = { viewModel.cancelStartTimer() }
             )
 
