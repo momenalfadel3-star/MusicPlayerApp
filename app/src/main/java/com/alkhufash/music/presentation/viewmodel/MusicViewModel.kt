@@ -50,7 +50,7 @@ class MusicViewModel @Inject constructor(
 
     private var positionJob: Job? = null
 
-    // Timer state
+    // ===== Timer State =====
     private val _sleepTimerMinutes = MutableStateFlow(0)
     val sleepTimerMinutes: StateFlow<Int> = _sleepTimerMinutes.asStateFlow()
 
@@ -62,6 +62,24 @@ class MusicViewModel @Inject constructor(
 
     private val _isStartTimerActive = MutableStateFlow(false)
     val isStartTimerActive: StateFlow<Boolean> = _isStartTimerActive.asStateFlow()
+
+    // عداد تنازلي حقيقي بالثواني
+    private val _sleepTimerSecondsLeft = MutableStateFlow(0L)
+    val sleepTimerSecondsLeft: StateFlow<Long> = _sleepTimerSecondsLeft.asStateFlow()
+
+    private val _startTimerSecondsLeft = MutableStateFlow(0L)
+    val startTimerSecondsLeft: StateFlow<Long> = _startTimerSecondsLeft.asStateFlow()
+
+    // نص العداد التنازلي المنسق
+    private val _sleepTimerDisplay = MutableStateFlow("00:00")
+    val sleepTimerDisplay: StateFlow<String> = _sleepTimerDisplay.asStateFlow()
+
+    private val _startTimerDisplay = MutableStateFlow("00:00")
+    val startTimerDisplay: StateFlow<String> = _startTimerDisplay.asStateFlow()
+
+    // Jobs للعداد التنازلي
+    private var sleepCountdownJob: Job? = null
+    private var startCountdownJob: Job? = null
 
     init {
         loadAllData()
@@ -137,6 +155,19 @@ class MusicViewModel @Inject constructor(
         }
     }
 
+    // ===== دالة تنسيق الوقت =====
+    private fun formatCountdown(seconds: Long): String {
+        if (seconds <= 0) return "00:00"
+        val hours = seconds / 3600
+        val mins = (seconds % 3600) / 60
+        val secs = seconds % 60
+        return if (hours > 0) {
+            String.format("%02d:%02d:%02d", hours, mins, secs)
+        } else {
+            String.format("%02d:%02d", mins, secs)
+        }
+    }
+
     // Playback Controls
     fun playSong(song: Song) {
         val songs = _uiState.value.songs
@@ -196,10 +227,12 @@ class MusicViewModel @Inject constructor(
         }
     }
 
-    // Timer Functions
+    // ===== Timer Functions (مُحسَّنة مع عداد تنازلي حقيقي) =====
+
     fun setSleepTimer(minutes: Int) {
         val workManager = WorkManager.getInstance(context)
         workManager.cancelUniqueWork(SleepTimerWorker.WORK_NAME)
+        sleepCountdownJob?.cancel()
 
         if (minutes > 0) {
             val request = OneTimeWorkRequestBuilder<SleepTimerWorker>()
@@ -212,15 +245,39 @@ class MusicViewModel @Inject constructor(
             )
             _isSleepTimerActive.value = true
             _sleepTimerMinutes.value = minutes
+
+            // بدء العداد التنازلي الحقيقي
+            val totalSeconds = minutes.toLong() * 60
+            _sleepTimerSecondsLeft.value = totalSeconds
+            _sleepTimerDisplay.value = formatCountdown(totalSeconds)
+
+            sleepCountdownJob = viewModelScope.launch {
+                var secondsLeft = totalSeconds
+                while (secondsLeft > 0) {
+                    delay(1000L)
+                    secondsLeft--
+                    _sleepTimerSecondsLeft.value = secondsLeft
+                    _sleepTimerDisplay.value = formatCountdown(secondsLeft)
+                    _sleepTimerMinutes.value = ((secondsLeft + 59) / 60).toInt()
+                }
+                // انتهى العداد - إعادة الضبط
+                _isSleepTimerActive.value = false
+                _sleepTimerMinutes.value = 0
+                _sleepTimerSecondsLeft.value = 0
+                _sleepTimerDisplay.value = "00:00"
+            }
         } else {
             _isSleepTimerActive.value = false
             _sleepTimerMinutes.value = 0
+            _sleepTimerSecondsLeft.value = 0
+            _sleepTimerDisplay.value = "00:00"
         }
     }
 
     fun setStartTimer(minutes: Int) {
         val workManager = WorkManager.getInstance(context)
         workManager.cancelUniqueWork(StartTimerWorker.WORK_NAME)
+        startCountdownJob?.cancel()
 
         if (minutes > 0) {
             val request = OneTimeWorkRequestBuilder<StartTimerWorker>()
@@ -233,9 +290,32 @@ class MusicViewModel @Inject constructor(
             )
             _isStartTimerActive.value = true
             _startTimerMinutes.value = minutes
+
+            // بدء العداد التنازلي الحقيقي
+            val totalSeconds = minutes.toLong() * 60
+            _startTimerSecondsLeft.value = totalSeconds
+            _startTimerDisplay.value = formatCountdown(totalSeconds)
+
+            startCountdownJob = viewModelScope.launch {
+                var secondsLeft = totalSeconds
+                while (secondsLeft > 0) {
+                    delay(1000L)
+                    secondsLeft--
+                    _startTimerSecondsLeft.value = secondsLeft
+                    _startTimerDisplay.value = formatCountdown(secondsLeft)
+                    _startTimerMinutes.value = ((secondsLeft + 59) / 60).toInt()
+                }
+                // انتهى العداد - إعادة الضبط
+                _isStartTimerActive.value = false
+                _startTimerMinutes.value = 0
+                _startTimerSecondsLeft.value = 0
+                _startTimerDisplay.value = "00:00"
+            }
         } else {
             _isStartTimerActive.value = false
             _startTimerMinutes.value = 0
+            _startTimerSecondsLeft.value = 0
+            _startTimerDisplay.value = "00:00"
         }
     }
 
@@ -255,6 +335,8 @@ class MusicViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         positionJob?.cancel()
+        sleepCountdownJob?.cancel()
+        startCountdownJob?.cancel()
     }
 }
 

@@ -1,8 +1,11 @@
 package com.alkhufash.music.presentation.screens.timer
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -12,14 +15,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alkhufash.music.R
+import com.alkhufash.music.presentation.theme.BatCyan
 import com.alkhufash.music.presentation.theme.BatOrange
 import com.alkhufash.music.presentation.theme.BatPink
 import com.alkhufash.music.presentation.theme.BatPurple
@@ -35,6 +41,9 @@ fun TimerScreen(
     val isStartTimerActive by viewModel.isStartTimerActive.collectAsStateWithLifecycle()
     val sleepMinutes by viewModel.sleepTimerMinutes.collectAsStateWithLifecycle()
     val startMinutes by viewModel.startTimerMinutes.collectAsStateWithLifecycle()
+    // العداد التنازلي الحقيقي
+    val sleepTimerDisplay by viewModel.sleepTimerDisplay.collectAsStateWithLifecycle()
+    val startTimerDisplay by viewModel.startTimerDisplay.collectAsStateWithLifecycle()
 
     var sleepTimerValue by remember { mutableFloatStateOf(30f) }
     var startTimerValue by remember { mutableFloatStateOf(30f) }
@@ -75,6 +84,7 @@ fun TimerScreen(
                 gradientColors = listOf(BatPurple, BatPink),
                 isActive = isSleepTimerActive,
                 activeMinutes = sleepMinutes,
+                countdownDisplay = sleepTimerDisplay,
                 sliderValue = sleepTimerValue,
                 onSliderChange = { sleepTimerValue = it },
                 onSetTimer = { viewModel.setSleepTimer(sleepTimerValue.toInt()) },
@@ -89,6 +99,7 @@ fun TimerScreen(
                 gradientColors = listOf(BatOrange, BatPink),
                 isActive = isStartTimerActive,
                 activeMinutes = startMinutes,
+                countdownDisplay = startTimerDisplay,
                 sliderValue = startTimerValue,
                 onSliderChange = { startTimerValue = it },
                 onSetTimer = { viewModel.setStartTimer(startTimerValue.toInt()) },
@@ -102,7 +113,6 @@ fun TimerScreen(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground
             )
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -159,11 +169,24 @@ fun TimerCard(
     gradientColors: List<Color>,
     isActive: Boolean,
     activeMinutes: Int,
+    countdownDisplay: String,
     sliderValue: Float,
     onSliderChange: (Float) -> Unit,
     onSetTimer: () -> Unit,
     onCancelTimer: () -> Unit
 ) {
+    // تأثير نبضة للمؤقت النشط
+    val infiniteTransition = rememberInfiniteTransition(label = "pulse")
+    val pulseScale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = if (isActive) 1.05f else 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(800, easing = EaseInOut),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "pulseScale"
+    )
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
@@ -213,7 +236,7 @@ fun TimerCard(
                             .padding(horizontal = 12.dp, vertical = 6.dp)
                     ) {
                         Text(
-                            "${activeMinutes}د",
+                            "نشط",
                             style = MaterialTheme.typography.labelMedium,
                             color = Color.White,
                             fontWeight = FontWeight.Bold
@@ -234,9 +257,7 @@ fun TimerCard(
                     modifier = Modifier.fillMaxWidth(),
                     color = gradientColors.first()
                 )
-
                 Spacer(modifier = Modifier.height(8.dp))
-
                 Slider(
                     value = sliderValue,
                     onValueChange = onSliderChange,
@@ -248,7 +269,6 @@ fun TimerCard(
                         inactiveTrackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
                     )
                 )
-
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -264,9 +284,7 @@ fun TimerCard(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-
                 Spacer(modifier = Modifier.height(14.dp))
-
                 // زر الضبط
                 Button(
                     onClick = onSetTimer,
@@ -284,25 +302,73 @@ fun TimerCard(
                     )
                 }
             } else {
-                // حالة نشطة
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
+                // ===== عرض العداد التنازلي الحقيقي =====
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(
+                            Brush.linearGradient(
+                                listOf(
+                                    gradientColors.first().copy(alpha = 0.15f),
+                                    gradientColors.last().copy(alpha = 0.15f)
+                                )
+                            )
+                        )
+                        .padding(vertical = 20.dp),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        Icons.Default.CheckCircle,
-                        contentDescription = null,
-                        tint = gradientColors.first(),
-                        modifier = Modifier.size(20.dp)
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "الوقت المتبقي",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        // العداد التنازلي الكبير
+                        Text(
+                            text = countdownDisplay,
+                            fontSize = 48.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = gradientColors.first(),
+                            modifier = Modifier.scale(pulseScale)
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "$activeMinutes دقيقة متبقية",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(14.dp))
+
+                // مؤشر نشاط
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    // نقطة خضراء نابضة
+                    Box(
+                        modifier = Modifier
+                            .size(10.dp)
+                            .clip(CircleShape)
+                            .background(BatCyan)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        "المؤقت نشط: $activeMinutes دقيقة متبقية",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = gradientColors.first(),
+                        "المؤقت يعمل...",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = BatCyan,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
+
                 Spacer(modifier = Modifier.height(14.dp))
+
                 OutlinedButton(
                     onClick = onCancelTimer,
                     modifier = Modifier.fillMaxWidth(),

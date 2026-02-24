@@ -5,34 +5,88 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-  <!-- Bat wings - purple -->
-  <path
-      android:pathData="M54,30 C54,30 28,36 16,50 C10,57 13,65 20,66 C28,67 35,61 40,55 C43,51 46,48 50,48 C52,48 53,50 54,52 C55,50 56,48 58,48 C62,48 65,51 68,55 C73,61 80,67 88,66 C95,65 98,57 92,50 C80,36 54,30 54,30 Z"
-      android:fillColor="#6B21A8"/>
-  <!-- Wing lower - pink -->
-  <path
-      android:pathData="M54,52 C53,50 52,48 50,48 C48,48 46,50 44,52 C40,56 35,61 28,64 C34,67 41,65 46,61 C49,58 52,55 54,58 C56,55 59,58 62,61 C67,65 74,67 80,64 C73,61 68,56 64,52 C62,50 60,48 58,48 C56,48 55,50 54,52 Z"
-      android:fillColor="#EC4899"/>
-  <!-- Bat ears -->
-  <path
-      android:pathData="M50,32 L46,22 L54,30 Z"
-      android:fillColor="#6B21A8"/>
-  <path
-      android:pathData="M58,32 L62,22 L54,30 Z"
-      android:fillColor="#6B21A8"/>
-  <!-- Musical note left -->
-  <path
-      android:pathData="M26,46 L26,56 C26,58 23,59 22,57 C21,55 23,53 25,54 L25,46 Z"
-      android:fillColor="#F0ABFC"/>
-  <path
-      android:pathData="M26,46 L31,44 L31,48 L26,50 Z"
-      android:fillColor="#F0ABFC"/>
-  <!-- Musical note right -->
-  <path
-      android:pathData="M82,46 L82,56 C82,58 79,59 78,57 C77,55 79,53 81,54 L81,46 Z"
-      android:fillColor="#F0ABFC"/>
-  <path
-      android:pathData="M82,46 L87,44 L87,48 L82,50 Z"
-      android:fillColor="#F0ABFC"/>
+    <!-- الجناح الأيسر الكبير - بنفسجي -->
+    <path
+        android:pathData="M54,30 C54,30 30,34 18,47 C12,54 14,63 21,65 C29,67 36,61 41,55 C44,51 47,48 50,48 C52,48 53,50 54,52 Z"
+        android:fillColor="#7C3AED"/>
+
+    <!-- الجناح الأيمن الكبير - بنفسجي -->
+    <path
+        android:pathData="M54,30 C54,30 78,34 90,47 C96,54 94,63 87,65 C79,67 72,61 67,55 C64,51 61,48 58,48 C56,48 55,50 54,52 Z"
+        android:fillColor="#7C3AED"/>
+
+    <!-- الجزء السفلي من الأجنحة - وردي فيوشيا -->
+    <path
+        android:pathData="M54,52 C53,50 52,48 50,48 C48,48 45,50 43,53 C39,58 34,63 27,65 C33,68 40,66 45,62 C48,59 51,56 54,58 C57,56 60,59 63,62 C68,66 75,68 81,65 C74,63 69,58 65,53 C63,50 60,48 58,48 C56,48 55,50 54,52 Z"
+        android:fillColor="#EC4899"/>
+
+    <!-- أذن يسرى حادة -->
+    <path
+        android:pathData="M50,32 L46,21 L54,30 Z"
+        android:fillColor="#7C3AED"/>
+
+    <!-- أذن يمنى حادة -->
+    <path
+        android:pathData="M58,32 L62,21 L54,30 Z"
+        android:fillColor="#7C3AED"/>
+
+    <!-- رأس الخفاش -->
+    <path
+        android:pathData="M54,30 m-8,0 a8,8 0,1 1,16 0 a8,8 0,1 1,-16 0"
+        android:fillColor="#6D28D9"/>
+
+    <!-- موجة صوتية يسرى - سيان نيون -->
+    <path
+        android:pathData="M26,52 L26,60"
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"/>
+    <path
+        android:pathData="M30,47 L30,65"
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"/>
+    <path
+        android:pathData="M34,50 L34,62"
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"/>
+    <path
+        android:pathData="M38,53 L38,59"
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"/>
+
+    <!-- موجة صوتية يمنى - سيان نيون -->
+    <path
+        android:pathData="M82,52 L82,60"
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"/>
+    <path
+        android:pathData="M78,47 L78,65"
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"/>
+    <path
+        android:pathData="M74,50 L74,62"
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"/>
+    <path
+        android:pathData="M70,53 L70,59"
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"/>
+
+    <!-- نجمة ذهبية يسرى -->
+    <path
+        android:pathData="M22,40 L23,37 L24,40 L27,40 L25,42 L26,45 L23,43 L20,45 L21,42 L19,40 Z"
+        android:fillColor="#F59E0B"/>
+
+    <!-- نجمة ذهبية يمنى -->
+    <path
+        android:pathData="M86,40 L87,37 L88,40 L91,40 L89,42 L90,45 L87,43 L84,45 L85,42 L83,40 Z"
+        android:fillColor="#F59E0B"/>
 
 </vector>

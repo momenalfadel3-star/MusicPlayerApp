@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- الألوان الأساسية للخفاش -->
+    <color name="bat_purple">#7C3AED</color>
+    <color name="bat_purple_light">#A855F7</color>
+    <color name="bat_purple_dark">#6D28D9</color>
+    <color name="bat_pink">#EC4899</color>
+    <color name="bat_pink_light">#F472B6</color>
+    <color name="bat_orange">#F97316</color>
+    <color name="bat_cyan">#06B6D4</color>
+    <color name="bat_gold">#F59E0B</color>
+
+    <!-- خلفيات داكنة -->
+    <color name="dark_background">#0A0A14</color>
+    <color name="dark_surface">#12121E</color>
+    <color name="dark_card">#1C1C2E</color>
+    <color name="dark_elevated">#252538</color>
     <color name="purple_dark">#1A0533</color>
-    <color name="purple_medium">#6B21A8</color>
+
+    <!-- ألوان قديمة للتوافق -->
+    <color name="purple_medium">#7C3AED</color>
     <color name="pink_light">#EC4899</color>
     <color name="orange_light">#F97316</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="surface_dark">#0F0F1A</color>
-    <color name="surface_card">#1E1E2E</color>
+    <color name="surface_dark">#0A0A14</color>
+    <color name="surface_card">#1C1C2E</color>
 </resources>
