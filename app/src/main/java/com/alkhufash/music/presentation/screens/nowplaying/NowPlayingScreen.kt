@@ -418,5 +418,5 @@ private fun formatDuration(ms: Long): String {
     if (ms <= 0) return "0:00"
     val seconds = (ms / 1000) % 60
     val minutes = (ms / 1000) / 60
-    return "%d:%02d".format(minutes, seconds)
+    val hours = minutes / 60; val mins = minutes % 60; return if (hours > 0) "%d:%02d:%02d".format(hours, mins, seconds) else "%d:%02d".format(mins, seconds)
 }
