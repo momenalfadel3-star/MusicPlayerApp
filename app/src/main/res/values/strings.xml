@@ -69,4 +69,14 @@
     <string name="license">الرخصة</string>
     <string name="mit_license">رخصة MIT</string>
     <string name="now_playing_label">يُشغَّل الآن</string>
+    <string name="transcription">تحويل صوت لنص</string>
+    <string name="transcription_subtitle">تحويل صوتك إلى نص مكتوب</string>
+    <string name="start_recording">ابدأ التسجيل</string>
+    <string name="stop_recording">إيقاف التسجيل</string>
+    <string name="transcription_records">سجلات التحويل</string>
+    <string name="no_transcriptions">لا توجد سجلات بعد</string>
+    <string name="mic_permission_required">يتطلب إذن الميكروفون</string>
+    <string name="copy_text">نسخ النص</string>
+    <string name="delete_record">حذف السجل</string>
+    <string name="clear_all">مسح الكل</string>
 </resources>

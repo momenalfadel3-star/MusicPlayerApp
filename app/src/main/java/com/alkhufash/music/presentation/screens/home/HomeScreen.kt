@@ -46,7 +46,8 @@ fun HomeScreen(
     viewModel: MusicViewModel,
     onSongClick: (Song) -> Unit,
     onNavigateToNowPlaying: () -> Unit,
-    onNavigateToSettings: () -> Unit
+    onNavigateToSettings: () -> Unit,
+    onNavigateToTranscription: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val playerState by viewModel.playerState.collectAsStateWithLifecycle()
@@ -145,6 +146,13 @@ fun HomeScreen(
                                     Icons.Default.Search,
                                     stringResource(R.string.search),
                                     tint = MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+                            IconButton(onClick = onNavigateToTranscription) {
+                                Icon(
+                                    Icons.Default.RecordVoiceOver,
+                                    stringResource(R.string.transcription),
+                                    tint = com.alkhufash.music.presentation.theme.BatCyan
                                 )
                             }
                             IconButton(onClick = onNavigateToSettings) {

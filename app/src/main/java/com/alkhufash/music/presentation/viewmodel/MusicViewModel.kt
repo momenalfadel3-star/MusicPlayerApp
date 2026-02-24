@@ -1,10 +1,14 @@
 package com.alkhufash.music.presentation.viewmodel
 
 import android.content.Context
+import android.content.Intent
+import android.os.Build
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.alkhufash.music.audio.SpeechToTextManager
 import com.alkhufash.music.domain.model.Album
 import com.alkhufash.music.domain.model.Artist
 import com.alkhufash.music.domain.model.Folder
@@ -32,8 +36,13 @@ import javax.inject.Inject
 class MusicViewModel @Inject constructor(
     private val repository: MusicRepository,
     private val musicController: MusicController,
+    val speechToTextManager: SpeechToTextManager,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
+
+    companion object {
+        private const val TAG = "MusicViewModel"
+    }
 
     // UI State
     private val _uiState = MutableStateFlow(MusicUiState())
@@ -354,6 +363,7 @@ class MusicViewModel @Inject constructor(
         positionJob?.cancel()
         sleepCountdownJob?.cancel()
         startCountdownJob?.cancel()
+        speechToTextManager.release()
     }
 }
 

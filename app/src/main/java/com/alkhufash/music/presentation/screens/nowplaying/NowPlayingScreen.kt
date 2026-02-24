@@ -39,7 +39,8 @@ fun NowPlayingScreen(
     viewModel: MusicViewModel,
     onNavigateBack: () -> Unit,
     onNavigateToTimer: () -> Unit,
-    onNavigateToEqualizer: () -> Unit
+    onNavigateToEqualizer: () -> Unit,
+    onNavigateToTranscription: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val playerState by viewModel.playerState.collectAsStateWithLifecycle()
@@ -398,6 +399,15 @@ fun NowPlayingScreen(
                             Icons.Default.Equalizer,
                             contentDescription = stringResource(R.string.equalizer),
                             tint = BatPurpleLight
+                        )
+                    }
+
+                    // تحويل صوت لنص
+                    IconButton(onClick = onNavigateToTranscription) {
+                        Icon(
+                            Icons.Default.RecordVoiceOver,
+                            contentDescription = "تحويل صوت لنص",
+                            tint = com.alkhufash.music.presentation.theme.BatCyan
                         )
                     }
 

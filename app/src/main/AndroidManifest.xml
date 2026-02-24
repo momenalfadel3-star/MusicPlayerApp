@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MusicApplication"
@@ -52,6 +54,16 @@
             android:name=".services.AutoStartTimerService"
             android:exported="false"
             android:foregroundServiceType="specialUse" />
+
+        <!-- Playback Broadcast Receiver for Timer Workers -->
+        <receiver
+            android:name=".receiver.PlaybackBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.alkhufash.music.START_PLAYBACK" />
+                <action android:name="com.alkhufash.music.PAUSE_PLAYBACK" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

@@ -17,6 +17,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import com.alkhufash.music.presentation.screens.settings.SettingsScreen
 import com.alkhufash.music.presentation.screens.timer.TimerScreen
+import com.alkhufash.music.presentation.screens.transcription.TranscriptionScreen
 import com.alkhufash.music.presentation.screens.video.VideoPlayerScreen
 import com.alkhufash.music.presentation.viewmodel.MusicViewModel
 
@@ -26,6 +27,7 @@ sealed class Screen(val route: String) {
     object Timer : Screen("timer")
     object Equalizer : Screen("equalizer")
     object Settings : Screen("settings")
+    object Transcription : Screen("transcription")
     object VideoPlayer : Screen("video_player/{videoUri}") {
         fun createRoute(videoUri: String) = "video_player/${Uri.encode(videoUri)}"
     }
@@ -64,6 +66,9 @@ fun MusicNavHost(
                 },
                 onNavigateToSettings = {
                     navController.navigate(Screen.Settings.route)
+                },
+                onNavigateToTranscription = {
+                    navController.navigate(Screen.Transcription.route)
                 }
             )
         }
@@ -73,7 +78,8 @@ fun MusicNavHost(
                 viewModel = viewModel,
                 onNavigateBack = { navController.popBackStack() },
                 onNavigateToTimer = { navController.navigate(Screen.Timer.route) },
-                onNavigateToEqualizer = { navController.navigate(Screen.Equalizer.route) }
+                onNavigateToEqualizer = { navController.navigate(Screen.Equalizer.route) },
+                onNavigateToTranscription = { navController.navigate(Screen.Transcription.route) }
             )
         }
 
@@ -92,6 +98,13 @@ fun MusicNavHost(
 
         composable(Screen.Settings.route) {
             SettingsScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.Transcription.route) {
+            TranscriptionScreen(
+                viewModel = viewModel,
                 onNavigateBack = { navController.popBackStack() }
             )
         }

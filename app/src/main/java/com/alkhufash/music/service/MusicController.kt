@@ -2,6 +2,7 @@ package com.alkhufash.music.service
 
 import android.content.ComponentName
 import android.content.Context
+import android.util.Log
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
@@ -23,9 +24,17 @@ class MusicController @Inject constructor(
 ) {
     private var mediaController: MediaController? = null
     private var controllerFuture: ListenableFuture<MediaController>? = null
+    private var isInitialized = false
 
     private val _playerState = MutableStateFlow(PlayerState())
     val playerState: StateFlow<PlayerState> = _playerState.asStateFlow()
+
+    companion object {
+        private const val TAG = "MusicController"
+    }
+
+    val isConnected: Boolean
+        get() = mediaController != null && mediaController?.isConnected == true
 
     private val playerListener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -58,14 +67,23 @@ class MusicController @Inject constructor(
     }
 
     fun initialize() {
+        if (isInitialized) return
+        isInitialized = true
+        Log.d(TAG, "تهيئة MusicController")
         val sessionToken = SessionToken(
             context,
             ComponentName(context, MusicService::class.java)
         )
         controllerFuture = MediaController.Builder(context, sessionToken).buildAsync()
         controllerFuture?.addListener({
-            mediaController = controllerFuture?.get()
-            mediaController?.addListener(playerListener)
+            try {
+                mediaController = controllerFuture?.get()
+                mediaController?.addListener(playerListener)
+                Log.d(TAG, "تم الاتصال بـ MediaSession بنجاح")
+            } catch (e: Exception) {
+                Log.e(TAG, "فشل الاتصال بـ MediaSession: ${e.message}")
+                isInitialized = false
+            }
         }, MoreExecutors.directExecutor())
     }
 
@@ -73,6 +91,8 @@ class MusicController @Inject constructor(
         mediaController?.removeListener(playerListener)
         controllerFuture?.let { MediaController.releaseFuture(it) }
         mediaController = null
+        isInitialized = false
+        Log.d(TAG, "تم تحرير MusicController")
     }
 
     fun playSongs(songs: List<Song>, startIndex: Int = 0) {
@@ -99,8 +119,21 @@ class MusicController @Inject constructor(
         }
     }
 
-    fun play() { mediaController?.play() }
-    fun pause() { mediaController?.pause() }
+    fun play() {
+        if (!isConnected) {
+            Log.w(TAG, "play() استدعاء قبل الاتصال - تجاهل")
+            // تهيئة تلقائية إذا لم يكن متصلاً
+            if (!isInitialized) initialize()
+        }
+        mediaController?.play()
+    }
+
+    fun pause() {
+        if (!isConnected) {
+            Log.w(TAG, "pause() استدعاء قبل الاتصال - تجاهل")
+        }
+        mediaController?.pause()
+    }
     fun playOrPause() {
         if (mediaController?.isPlaying == true) pause() else play()
     }

@@ -35,6 +35,7 @@ object DatabaseModule {
     fun provideMusicDao(database: MusicDatabase): MusicDao {
         return database.musicDao()
     }
+
 }
 
 @Module

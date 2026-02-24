@@ -8,10 +8,19 @@ import android.content.Intent
 import android.os.Build
 import android.os.CountDownTimer
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.alkhufash.music.R
+import com.alkhufash.music.receiver.PlaybackBroadcastReceiver
+import com.alkhufash.music.service.MusicController
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AutoStartTimerService : Service() {
+
+    @Inject
+    lateinit var musicController: MusicController
     
     private var countDownTimer: CountDownTimer? = null
     private var timeLeftInMillis = 0L
@@ -19,6 +28,7 @@ class AutoStartTimerService : Service() {
     companion object {
         const val CHANNEL_ID = "timer_channel"
         const val NOTIFICATION_ID = 1
+        private const val TAG = "AutoStartTimerService"
     }
 
     override fun onCreate() {
@@ -29,21 +39,25 @@ class AutoStartTimerService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val minutes = intent?.getIntExtra("timer_minutes", 30) ?: 30
         timeLeftInMillis = minutes * 60 * 1000L
-        
+
+        Log.d(TAG, "بدء مؤقت التشغيل التلقائي: $minutes دقيقة")
+
         startCountdown()
         startForeground(NOTIFICATION_ID, createNotification("العد التنازلي: ${formatTime(timeLeftInMillis)}"))
-        
+
         return START_NOT_STICKY
     }
     
     private fun startCountdown() {
+        countDownTimer?.cancel()
         countDownTimer = object : CountDownTimer(timeLeftInMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 timeLeftInMillis = millisUntilFinished
                 updateNotification("العد التنازلي: ${formatTime(millisUntilFinished)}")
             }
-            
+
             override fun onFinish() {
+                Log.d(TAG, "انتهى العد التنازلي - بدء التشغيل")
                 startPlayback()
                 stopSelf()
             }
@@ -63,8 +77,18 @@ class AutoStartTimerService : Service() {
     }
     
     private fun startPlayback() {
-        val intent = Intent("com.alkhufash.music.START_PLAYBACK")
-        sendBroadcast(intent)
+        // محاولة التشغيل المباشر عبر MusicController
+        try {
+            musicController.play()
+            Log.d(TAG, "تم بدء التشغيل مباشرة عبر MusicController")
+        } catch (e: Exception) {
+            Log.w(TAG, "فشل التشغيل المباشر، إرسال broadcast: ${e.message}")
+            // إرسال broadcast كبديل
+            val intent = Intent(PlaybackBroadcastReceiver.ACTION_START_PLAYBACK).apply {
+                setPackage(packageName)
+            }
+            sendBroadcast(intent)
+        }
     }
     
     private fun createNotification(text: String) = NotificationCompat.Builder(this, CHANNEL_ID)
